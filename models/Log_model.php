@@ -1,5 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * Class Log_model.php
+ * Handle Logging model data
+ * @package models
+ * @author Cahya DSN
+ * @version 1.0.0
+ * @date_create 29/12/2017
+**/
 class Log_model extends CI_Model
 {
     private $_log_table;
