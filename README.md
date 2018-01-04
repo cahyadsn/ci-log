@@ -28,17 +28,29 @@ CREATE TABLE `logs` (
 
 You can either autoload the library (I don't advise you to do that), or load the library where you want to use it:
 ```php
-$this->load->library('log');
+$this->load->library('logs');
 ```
 
 ### log($message, $code = 0, $user_id = 0)
 
 The log() method allows you to write the log. You must pass it the `$message` you want to write. If you didn't set the `$config['session_user_id']`, you can also pass it a user ID. For your convenience, you also can pass a code of the message; who knows, maybe you want to have different colors on the messages when you output the logs. You can do that by passing a code to the message you write.
 
+```php
+$this->logs->log('user login to application');
+```
+
 ### get_log($user_id = NULL, $code = NULL, $date = NULL, $order_by = NULL, $limit = NULL)
 
 The get_log() method allows you to retrieve the logs of a/many user/s...
 
+```php
+$this->logs->get_log();
+```
+
 ### delete_log($user_id = NULL, $date = NULL)
 
 The delete_log() method allows you do delete the (user) logs regarding of a date in time...
+
+```php
+$this->logs->delete_log(1);
+```
