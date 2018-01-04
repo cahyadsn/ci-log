@@ -1,13 +1,14 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Class Log.php
+ * Class Logs.php
  * Handle Logging data
  * @package libraries
  * @author Cahya DSN
  * @version 1.0.0
  * @date_create 29/12/2017
+ * @date_update 04/01/2018
 **/
-class Log
+class Logs
 {
     private $_store_in;
     private $ci;
