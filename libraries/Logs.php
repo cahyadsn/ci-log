@@ -6,7 +6,7 @@
  * @author Cahya DSN
  * @version 1.0.0
  * @date_create 29/12/2017
- * @date_update 04/01/2018
+ * @date_update 08/01/2018
 **/
 class Logs
 {
@@ -86,16 +86,18 @@ class Logs
                 'user_id' => $user_id,
                 'date_time' => $date_time,
                 'code' => $code,
+                'ip_addess'=> $this->get_user_ip(),
                 'message' => $message
             );
             if($this->ci->log_model->set_message($insert_data)) {
                 return TRUE;
             }
         } else {
+            $ip_address= $this->get_user_ip();
             $date = date('Y-m-d');
             $date_time = date('Y-m-d H:i:s');
             $file = $this->_store_in.'/log-' . $user_id . '-' . $date . '.php';
-            $log_message = $date_time . ' *-* ' . $code . ' *-* ' . $message . "\r\n";
+            $log_message = $date_time . ' *-* ' . $code . ' *-* ' . $ip_address '. *-* ' . $message . "\r\n";
             if (!file_exists($file)) {
                 $log_message = "<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>\r\n\r\n" . $log_message;
             }
@@ -144,8 +146,9 @@ class Logs
                         $line = explode('*-*',$lines[$k]);
                         $date_time = $line[0];
                         $code = $line[1];
-                        $message = $line[2];
-                        $messages[] = array('user_id'=>$user_id,'date_time'=>$date_time,'code'=>$code,'message'=>$message);
+                        $ip_address = $line[2];
+                        $message = $line[3];
+                        $messages[] = array('user_id'=>$user_id,'date_time'=>$date_time,'code'=>$code,'ip'=>$ip_address,'message'=>$message);
                     }
                 }
             }
