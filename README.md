@@ -13,6 +13,7 @@ CREATE TABLE `logs` (
   `user_id` int(11) DEFAULT NULL,
   `date_time` datetime DEFAULT NULL,
   `code` int(11) DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE 'utf8_general_ci' NULL,
   `message` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
