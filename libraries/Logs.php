@@ -220,16 +220,23 @@ class Logs
     */
     function get_user_ip()
     {
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
         $ip='';
-        if (filter_var($client, FILTER_VALIDATE_IP)) {
-            $ip = $client;
-        } elseif(filter_var($forward, FILTER_VALIDATE_IP)) {
-            $ip = $forward;
+        if (function_exists('file_get_contents')) {
+            $ipify   = @file_get_contents('https://api.ipify.org');
+            if (filter_var($ipify, FILTER_VALIDATE_IP)) {
+                $ip = $ipify;
+            }
         } else {
-            $ip = $remote;
+            $client  = @$_SERVER['HTTP_CLIENT_IP'];
+            $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+            $remote  = $_SERVER['REMOTE_ADDR'];
+            if (filter_var($client, FILTER_VALIDATE_IP)) {
+                $ip = $client;
+            } elseif(filter_var($forward, FILTER_VALIDATE_IP)) {
+                $ip = $forward;
+            } else {
+                $ip = $remote;
+            }
         }
         return $ip;
     }
